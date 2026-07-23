@@ -223,7 +223,7 @@ canvas {
 <h1>😂 Meme Maker</h1>
 
 
-<p>Create funny memes in seconds!</p>
+<p>Create your dream meme today, with MemeMaker.</p>
 
 
 <label class="upload-btn">
@@ -361,30 +361,35 @@ canvas.width/2,
 
 50
 
-);
-
-
+);let topY = document.getElementById("topY").value;
+let bottomY = document.getElementById("bottomY").value;
 
 ctx.strokeText(
-
-bottom,
-
+top,
 canvas.width/2,
-
-canvas.height-30
-
+topY
 );
-
 
 ctx.fillText(
-
-bottom,
-
+top,
 canvas.width/2,
-
-canvas.height-30
-
+topY
 );
+
+ctx.strokeText(
+bottom,
+canvas.width/2,
+bottomY
+);
+
+ctx.fillText(
+bottom,
+canvas.width/2,
+bottomY
+);
+
+
+
 
 
 }
@@ -471,7 +476,8 @@ image.src = meme.image;
 
 }
 
-
+document.getElementById("topY").addEventListener("input", makeMeme);
+document.getElementById("bottomY").addEventListener("input", makeMeme);
 
 </script>
 
