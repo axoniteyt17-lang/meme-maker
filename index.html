@@ -1,1 +1,474 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+
+<title>😂 Meme Maker</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@400;600&display=swap');
+
+
+* {
+    box-sizing:border-box;
+}
+
+
+body {
+
+    font-family:'Poppins', Arial, sans-serif;
+
+    background:
+    radial-gradient(circle at top,#6366f1,transparent 40%),
+    linear-gradient(135deg,#111827,#020617);
+
+    min-height:100vh;
+
+    color:white;
+
+    text-align:center;
+
+    padding:30px;
+
+}
+
+
+.container {
+
+    max-width:700px;
+
+    margin:auto;
+
+    background:rgba(255,255,255,0.1);
+
+    backdrop-filter:blur(15px);
+
+    padding:35px;
+
+    border-radius:25px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+
+}
+
+
+h1 {
+
+    font-family:'Luckiest Guy';
+
+    font-size:55px;
+
+    color:#facc15;
+
+    text-shadow:3px 3px black;
+
+}
+
+
+p {
+
+    color:#ddd;
+
+    font-size:18px;
+
+}
+
+
+/* Upload button */
+
+.upload-btn {
+
+    display:inline-block;
+
+    background:rgba(255,255,255,0.12);
+
+    border:2px solid rgba(255,255,255,0.25);
+
+    color:white;
+
+    padding:14px 25px;
+
+    border-radius:50px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    margin:10px;
+
+    transition:.3s;
+
+}
+
+
+.upload-btn:hover {
+
+    background:rgba(255,255,255,0.25);
+
+    border-color:#facc15;
+
+    transform:translateY(-3px);
+
+}
+
+
+.upload-btn input {
+
+    display:none;
+
+}
+
+
+/* Text boxes */
+
+input[type="text"] {
+
+    background:rgba(255,255,255,0.15);
+
+    color:white;
+
+    border:2px solid rgba(255,255,255,0.2);
+
+    padding:14px;
+
+    border-radius:15px;
+
+    width:220px;
+
+    font-size:16px;
+
+    outline:none;
+
+    margin:8px;
+
+}
+
+
+input[type="text"]::placeholder {
+
+    color:#ddd;
+
+}
+
+
+input[type="text"]:focus {
+
+    border-color:#facc15;
+
+    box-shadow:0 0 15px rgba(250,204,21,.5);
+
+}
+
+
+/* Buttons */
+
+button {
+
+    background:linear-gradient(135deg,#ec4899,#8b5cf6);
+
+    color:white;
+
+    border:none;
+
+    padding:14px 25px;
+
+    margin:8px;
+
+    border-radius:50px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+button:hover {
+
+    transform:scale(1.08);
+
+    box-shadow:0 10px 25px rgba(236,72,153,.5);
+
+}
+
+
+canvas {
+
+    margin-top:25px;
+
+    max-width:100%;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 30px black;
+
+}
+
+
+</style>
+
+</head>
+<body>
+
+
+<div class="container">
+
+
+<h1>😂 Meme Maker</h1>
+
+
+<p>Create funny memes in seconds!</p>
+
+
+<label class="upload-btn">
+
+📷 Choose Meme Image
+
+<input type="file" id="imageInput">
+
+</label>
+
+
+<br>
+
+
+<input type="text" id="topText" placeholder="Top text">
+
+
+<input type="text" id="bottomText" placeholder="Bottom text">
+
+
+<br>
+
+
+<button onclick="makeMeme()">✨ Create Meme</button>
+
+<button onclick="downloadMeme()">⬇ Download</button>
+
+<button onclick="randomMeme()">⭐ Random Meme</button>
+
+
+<br>
+
+
+<canvas id="canvas"></canvas>
+
+
+</div>
+
+
+
+<script>
+
+
+let canvas = document.getElementById("canvas");
+
+let ctx = canvas.getContext("2d");
+
+let image = new Image();
+
+
+
+document.getElementById("imageInput").onchange = function(e){
+
+
+let reader = new FileReader();
+
+
+reader.onload = function(event){
+
+
+image.onload = function(){
+
+
+canvas.width = image.width;
+
+canvas.height = image.height;
+
+
+ctx.drawImage(image,0,0);
+
+
+}
+
+
+image.src = event.target.result;
+
+
+}
+
+
+reader.readAsDataURL(e.target.files[0]);
+
+
+};
+
+
+
+function makeMeme(){
+
+
+ctx.drawImage(image,0,0);
+
+
+ctx.fillStyle = "white";
+
+ctx.strokeStyle = "black";
+
+ctx.lineWidth = 5;
+
+
+ctx.font = "40px Impact";
+
+ctx.textAlign = "center";
+
+
+
+let top = document.getElementById("topText").value;
+
+let bottom = document.getElementById("bottomText").value;
+
+
+
+ctx.strokeText(
+
+top,
+
+canvas.width/2,
+
+50
+
+);
+
+
+ctx.fillText(
+
+top,
+
+canvas.width/2,
+
+50
+
+);
+
+
+
+ctx.strokeText(
+
+bottom,
+
+canvas.width/2,
+
+canvas.height-30
+
+);
+
+
+ctx.fillText(
+
+bottom,
+
+canvas.width/2,
+
+canvas.height-30
+
+);
+
+
+}
+
+
+
+function downloadMeme(){
+
+
+let link = document.createElement("a");
+
+
+link.download = "my-meme.png";
+
+
+link.href = canvas.toDataURL();
+
+
+link.click();
+
+
+}
+const memes = [
+
+{
+image:"https://i.imgflip.com/30b1gx.jpg",
+top:"When the teacher says the homework is easy",
+bottom:"The homework:"
+},
+
+{
+image:"https://i.imgflip.com/1bij.jpg",
+top:"Me trying to fix something",
+bottom:"Making it worse"
+},
+
+{
+image:"https://i.imgflip.com/1g8my4.jpg",
+top:"When someone says 'one more game'",
+bottom:"3 hours later..."
+},
+
+{
+image:"https://i.imgflip.com/2fm6x.jpg",
+top:"Me waiting for my internet to work",
+bottom:"Still waiting..."
+}
+
+];
+
+
+
+function randomMeme(){
+
+
+let meme = memes[Math.floor(Math.random()*memes.length)];
+
+
+
+image.onload = function(){
+
+
+canvas.width = image.width;
+
+canvas.height = image.height;
+
+
+
+document.getElementById("topText").value = meme.top;
+
+document.getElementById("bottomText").value = meme.bottom;
+
+
+
+makeMeme();
+
+
+};
+
+
+
+image.src = meme.image;
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
