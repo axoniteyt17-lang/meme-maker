@@ -1,1 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>😂 Meme Maker</title>
 
+<style>
+body {
+    font-family: Arial;
+    background: #111827;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+canvas {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+input, button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>😂 Meme Maker</h1>
+
+<p>Add text to images and make memes!</p>
+
+<input type="file" id="imageInput">
+
+<br>
+
+<input id="topText" placeholder="Top text">
+
+<input id="bottomText" placeholder="Bottom text">
+
+<br>
+
+<button onclick="makeMeme()">Create Meme</button>
+
+<button onclick="downloadMeme()">Download</button>
+
+<br><br>
+
+<canvas id="canvas"></canvas>
+
+
+</div>
+
+
+<script>
+
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+
+let image = new Image();
+
+
+document.getElementById("imageInput").onchange = function(e){
+
+let file = e.target.files[0];
+
+let reader = new FileReader();
+
+reader.onload=function(event){
+
+image.onload=function(){
+
+canvas.width=image.width;
+canvas.height=image.height;
+
+ctx.drawImage(image,0,0);
+
+}
+
+image.src=event.target.result;
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+
+
+function makeMeme(){
+
+ctx.drawImage(image,0,0);
+
+
+ctx.fillStyle="white";
+ctx.strokeStyle="black";
+ctx.lineWidth=5;
+
+ctx.font="40px Impact";
+ctx.textAlign="center";
+
+
+ctx.strokeText(
+document.getElementById("topText").value,
+canvas.width/2,
+50
+);
+
+ctx.fillText(
+document.getElementById("topText").value,
+canvas.width/2,
+50
+);
+
+
+ctx.strokeText(
+document.getElementById("bottomText").value,
+canvas.width/2,
+canvas.height-30
+);
+
+ctx.fillText(
+document.getElementById("bottomText").value,
+canvas.width/2,
+canvas.height-30
+);
+
+
+}
+
+
+
+function downloadMeme(){
+
+let link=document.createElement("a");
+
+link.download="meme.png";
+
+link.href=canvas.toDataURL();
+
+link.click();
+
+}
+
+
+</script>
+
+</body>
+</html>
