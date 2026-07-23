@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>😂 Meme Maker</title>
+
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@400;600&display=swap');
 
+
 * {
-    box-sizing: border-box;
+    box-sizing:border-box;
 }
 
 
 body {
-    font-family: 'Poppins', sans-serif;
+
+    font-family:'Poppins', Arial, sans-serif;
+
     background:
-    radial-gradient(circle at top, #6366f1, transparent 40%),
+    radial-gradient(circle at top,#6366f1,transparent 40%),
     linear-gradient(135deg,#111827,#020617);
 
     min-height:100vh;
+
     color:white;
+
     text-align:center;
+
     padding:30px;
+
 }
+
 
 
 .container {
 
     max-width:700px;
+
     margin:auto;
 
     background:rgba(255,255,255,0.1);
@@ -37,8 +49,7 @@ body {
 
     border-radius:25px;
 
-    box-shadow:
-    0 20px 50px rgba(0,0,0,0.4);
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
 
 }
 
@@ -47,12 +58,12 @@ body {
 h1 {
 
     font-family:'Luckiest Guy';
+
     font-size:55px;
 
     color:#facc15;
 
-    text-shadow:
-    3px 3px #000;
+    text-shadow:3px 3px black;
 
 }
 
@@ -61,39 +72,14 @@ h1 {
 p {
 
     color:#ddd;
+
     font-size:18px;
 
 }
 
 
 
-input {
-
-    background:white;
-
-    border:none;
-
-    padding:12px;
-
-    margin:8px;
-
-    border-radius:12px;
-
-    font-size:16px;
-
-}
-
-
-
-input[type=file] {
-
-    background:#2563eb;
-
-    color:white;
-
-    cursor:pointer;
-
-}
+/* Upload button */
 
 .upload-btn {
 
@@ -122,6 +108,7 @@ input[type=file] {
 }
 
 
+
 .upload-btn:hover {
 
     background:rgba(255,255,255,0.25);
@@ -130,9 +117,8 @@ input[type=file] {
 
     transform:translateY(-3px);
 
-    box-shadow:0 8px 20px rgba(250,204,21,0.3);
-
 }
+
 
 
 .upload-btn input {
@@ -143,14 +129,83 @@ input[type=file] {
 
 
 
+/* Text boxes */
+
+input[type="text"] {
+
+    background:rgba(255,255,255,0.15);
+
+    color:white;
+
+    border:2px solid rgba(255,255,255,0.2);
+
+    padding:14px;
+
+    border-radius:15px;
+
+    width:220px;
+
+    font-size:16px;
+
+    outline:none;
+
+    margin:8px;
+
+}
+
+
+
+input[type="text"]::placeholder {
+
+    color:#ddd;
+
+}
+
+
+
+input[type="text"]:focus {
+
+    border-color:#facc15;
+
+    box-shadow:0 0 15px rgba(250,204,21,.5);
+
+}
+
+
+
+/* Buttons */
+
+button {
+
+    background:linear-gradient(135deg,#ec4899,#8b5cf6);
+
+    color:white;
+
+    border:none;
+
+    padding:14px 25px;
+
+    margin:8px;
+
+    border-radius:50px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
 
 
 button:hover {
 
     transform:scale(1.08);
 
-    box-shadow:
-    0 10px 25px rgba(236,72,153,.5);
+    box-shadow:0 10px 25px rgba(236,72,153,.5);
 
 }
 
@@ -164,40 +219,57 @@ canvas {
 
     border-radius:15px;
 
-    box-shadow:
-    0 10px 30px black;
+    box-shadow:0 10px 30px black;
 
 }
-
 
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
+
 <h1>😂 Meme Maker</h1>
 
-<p>Add text to images and make memes!</p>
+
+<p>Create funny memes in seconds!</p>
+
+
+
+<label class="upload-btn">
+
+📷 Choose Meme Image
 
 <input type="file" id="imageInput">
 
-<br>
+</label>
 
-<input id="topText" placeholder="Top text">
-
-<input id="bottomText" placeholder="Bottom text">
 
 <br>
 
-<button onclick="makeMeme()">Create Meme</button>
 
-<button onclick="downloadMeme()">Download</button>
+<input type="text" id="topText" placeholder="Top text">
 
-<br><br>
+
+<input type="text" id="bottomText" placeholder="Bottom text">
+
+
+<br>
+
+
+<button onclick="makeMeme()">✨ Create Meme</button>
+
+<button onclick="downloadMeme()">⬇ Download</button>
+
+
+<br>
+
 
 <canvas id="canvas"></canvas>
 
@@ -205,36 +277,49 @@ canvas {
 </div>
 
 
+
 <script>
 
-let canvas = document.getElementById("canvas");
-let ctx = canvas.getContext("2d");
 
-let image = new Image();
+let canvas=document.getElementById("canvas");
+
+let ctx=canvas.getContext("2d");
+
+let image=new Image();
 
 
-document.getElementById("imageInput").onchange = function(e){
 
-let file = e.target.files[0];
+document.getElementById("imageInput").onchange=function(e){
 
-let reader = new FileReader();
+
+let reader=new FileReader();
+
 
 reader.onload=function(event){
 
+
 image.onload=function(){
 
+
 canvas.width=image.width;
+
 canvas.height=image.height;
+
 
 ctx.drawImage(image,0,0);
 
+
 }
+
 
 image.src=event.target.result;
 
+
 }
 
-reader.readAsDataURL(file);
+
+reader.readAsDataURL(e.target.files[0]);
+
 
 }
 
@@ -242,40 +327,66 @@ reader.readAsDataURL(file);
 
 function makeMeme(){
 
+
 ctx.drawImage(image,0,0);
 
 
 ctx.fillStyle="white";
+
 ctx.strokeStyle="black";
+
 ctx.lineWidth=5;
 
+
 ctx.font="40px Impact";
+
 ctx.textAlign="center";
 
 
-ctx.strokeText(
-document.getElementById("topText").value,
-canvas.width/2,
-50
-);
-
-ctx.fillText(
-document.getElementById("topText").value,
-canvas.width/2,
-50
-);
-
 
 ctx.strokeText(
-document.getElementById("bottomText").value,
+
+document.getElementById("topText").value,
+
 canvas.width/2,
-canvas.height-30
+
+50
+
 );
 
+
 ctx.fillText(
-document.getElementById("bottomText").value,
+
+document.getElementById("topText").value,
+
 canvas.width/2,
+
+50
+
+);
+
+
+
+ctx.strokeText(
+
+document.getElementById("bottomText").value,
+
+canvas.width/2,
+
 canvas.height-30
+
+);
+
+
+
+ctx.fillText(
+
+document.getElementById("bottomText").value,
+
+canvas.width/2,
+
+canvas.height-30
+
 );
 
 
@@ -285,18 +396,26 @@ canvas.height-30
 
 function downloadMeme(){
 
+
 let link=document.createElement("a");
 
-link.download="meme.png";
+
+link.download="my-meme.png";
+
 
 link.href=canvas.toDataURL();
 
+
 link.click();
+
 
 }
 
 
+
 </script>
 
+
 </body>
+
 </html>
