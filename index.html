@@ -95,32 +95,53 @@ input[type=file] {
 
 }
 
+.upload-btn {
 
+    display:inline-block;
 
-button {
+    background:rgba(255,255,255,0.12);
 
-    background:
-    linear-gradient(135deg,#ec4899,#8b5cf6);
+    border:2px solid rgba(255,255,255,0.25);
 
     color:white;
 
-    border:none;
-
     padding:14px 25px;
 
-    margin:8px;
-
     border-radius:50px;
-
-    font-size:16px;
 
     font-weight:bold;
 
     cursor:pointer;
 
+    margin:10px;
+
+    backdrop-filter:blur(10px);
+
     transition:0.3s;
 
 }
+
+
+.upload-btn:hover {
+
+    background:rgba(255,255,255,0.25);
+
+    border-color:#facc15;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(250,204,21,0.3);
+
+}
+
+
+.upload-btn input {
+
+    display:none;
+
+}
+
+
 
 
 
