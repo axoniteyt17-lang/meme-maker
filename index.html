@@ -1,142 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
+<title>MemeMaker</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>😂 MemeMaker</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@400;600&display=swap');
 
-*{
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#111827,#020617);
-    color:white;
-    text-align:center;
-    padding:30px;
-    min-height:100vh;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#4b0082,#9b59ff);
+    color: white;
+    text-align: center;
 }
 
-.container{
-    max-width:850px;
+.container {
+    max-width: 900px;
     margin:auto;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(12px);
-    padding:30px;
-    border-radius:25px;
-    box-shadow:0 15px 40px rgba(0,0,0,.4);
+    padding:20px;
 }
 
-h1{
-    font-family:'Luckiest Guy',cursive;
-    font-size:56px;
-    color:#facc15;
-    margin-bottom:10px;
+h1 {
+    font-size:48px;
 }
 
-p{
-    color:#ddd;
-    margin-bottom:25px;
+.card {
+    background:rgba(255,255,255,0.15);
+    padding:20px;
+    border-radius:20px;
+    margin:20px 0;
 }
 
-/* Template gallery */
-.templates{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:12px;
-    margin-bottom:25px;
-}
-
-.templates img{
-    width:120px;
-    height:90px;
-    object-fit:cover;
-    border-radius:12px;
-    cursor:pointer;
-    border:3px solid transparent;
-    transition:.2s;
-}
-
-.templates img:hover{
-    transform:scale(1.05);
-    border-color:#facc15;
-}
-
-/* Purple upload button */
-.upload-btn{
-    display:inline-block;
-    background:linear-gradient(135deg,#ec4899,#8b5cf6);
-    color:white;
+input, select {
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:10px;
     border:none;
-    padding:14px 24px;
-    border-radius:999px;
-    cursor:pointer;
-    font-weight:600;
-    margin-bottom:20px;
-    appearance:none;
-    -webkit-appearance:none;
-}
-
-.upload-btn input{
-    display:none;
-}
-
-/* Text boxes */
-input[type="text"]{
-    width:240px;
-    padding:12px 14px;
-    border-radius:14px;
-    border:none;
-    margin:8px;
     font-size:16px;
 }
 
-/* Labels */
-label{
-    display:block;
-    margin-top:10px;
-    color:#ddd;
-}
-
-input[type="range"]{
-    width:260px;
-}
-
-/* Purple buttons */
-button{
-    background:linear-gradient(135deg,#ec4899,#8b5cf6);
+button {
+    background:#b026ff;
     color:white;
     border:none;
-    outline:none;
-    padding:14px 22px;
-    border-radius:999px;
+    padding:12px 20px;
+    margin:5px;
+    border-radius:12px;
     cursor:pointer;
-    font-weight:600;
-    margin:10px 6px;
-    transition:.2s;
-    appearance:none;
-    -webkit-appearance:none;
+    font-size:16px;
 }
 
-button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(236,72,153,.35);
+button:hover {
+    transform:scale(1.05);
 }
 
-/* Canvas */
-canvas{
-    margin-top:25px;
+canvas {
     max-width:100%;
-    border-radius:18px;
-    background:#111;
-    box-shadow:0 10px 30px rgba(0,0,0,.5);
+    border-radius:15px;
+    background:white;
 }
+
+.controls {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+
+#alertBox {
+    display:none;
+    background:#111;
+    color:white;
+    padding:25px;
+    border-radius:20px;
+    margin-top:20px;
+    font-size:20px;
+}
+
+
+@media(max-width:600px){
+
+h1 {
+    font-size:32px;
+}
+
+button {
+    width:100%;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
@@ -144,148 +105,267 @@ canvas{
 <div class="container">
 
 <h1>😂 MemeMaker</h1>
-<p>Create your dream meme today, with MemeMaker.</p>
 
-<h2>🔥 Meme Templates</h2>
 
-<div class="templates">
-    <img src="download (1).jfif" onclick="loadTemplate('download (1).jfif')" alt="template">
-    <img src="download (2).jfif" onclick="loadTemplate('download (2).jfif')" alt="template">
-    <img src="iiuuiui.jfif" onclick="loadTemplate('iiuuiui.jfif')" alt="template">
-    <img src="images (1).jfif" onclick="loadTemplate('images (1).jfif')" alt="template">
-    <img src="images.jfif" onclick="loadTemplate('images.jfif')" alt="template">
-    <img src="ioioioi.jfif" onclick="loadTemplate('ioioioi.jfif')" alt="template">
-    <img src="sddefault.jpg" onclick="loadTemplate('sddefault.jpg')" alt="template">
+<div class="card">
+
+<h2>Create your meme</h2>
+
+<input type="file" id="imageUpload" accept="image/*">
+
+
+<div class="controls">
+
+<div>
+<label>Top Text</label>
+<input id="topText" placeholder="Top text">
 </div>
 
-<label class="upload-btn">
-    📷 Choose Meme Image
-    <input type="file" id="imageInput" accept="image/*">
-</label>
 
-<br>
+<div>
+<label>Bottom Text</label>
+<input id="bottomText" placeholder="Bottom text">
+</div>
 
-<input type="text" id="topText" placeholder="Top text">
-<input type="text" id="bottomText" placeholder="Bottom text">
 
-<label>🎚️ Top Text Position</label>
-<input type="range" id="topY" min="30" max="300" value="60">
-
-<label>🎚️ Bottom Text Position</label>
-<input type="range" id="bottomY" min="100" max="1000" value="450">
-
-<br>
-
-<button onclick="makeMeme()">✨ Create Meme</button>
-<button onclick="downloadMeme()">⬇ Download</button>
-<button onclick="randomMeme()">⭐ Random Meme</button>
-
-<canvas id="canvas"></canvas>
+<div>
+<label>Text Size</label>
+<input type="range" id="textSize" min="20" max="80" value="40">
+</div>
 
 </div>
+
+
+<button onclick="randomMeme()">🎲 Random Meme</button>
+
+<button onclick="downloadMeme()">⬇️ Download</button>
+
+<button onclick="deleteEverything()">🗑️ Delete Everything</button>
+
+
+</div>
+
+
+<div class="card">
+
+<canvas id="canvas" width="700" height="500"></canvas>
+
+</div>
+
+
+<div id="alertBox">
+
+🚨 EMERGENCY ALERT 🚨
+<br><br>
+Max has pressed the delete button.
+<br><br>
+Initiating anti-chaos protocols...
+<br><br>
+🛡️ Backup created successfully.
+
+</div>
+
 
 <script>
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const image = new Image();
 
-function resizeCanvas(){
-    canvas.width = image.width;
-    canvas.height = image.height;
-}
+const imageUpload = document.getElementById("imageUpload");
+const topText = document.getElementById("topText");
+const bottomText = document.getElementById("bottomText");
+const textSize = document.getElementById("textSize");
 
-function loadTemplate(file){
-    image.onload = function(){
-        resizeCanvas();
-        makeMeme();
-    };
-    image.src = file;
-}
+let img = new Image();
 
-document.getElementById("imageInput").onchange = function(e){
-    const reader = new FileReader();
 
-    reader.onload = function(event){
-        image.onload = function(){
-            resizeCanvas();
-            makeMeme();
-        };
-        image.src = event.target.result;
-    };
+// Load uploaded image
+imageUpload.addEventListener("change", function(){
 
-    reader.readAsDataURL(e.target.files[0]);
-};
+    const file = this.files[0];
 
-function makeMeme(){
-    if(!image.src) return;
+    if(file){
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            img.onload = function(){
+                drawMeme();
+            }
+
+            img.src = e.target.result;
+
+        }
+
+        reader.readAsDataURL(file);
+
+    }
+
+});
+
+
+// Update preview when text changes
+topText.addEventListener("input", drawMeme);
+bottomText.addEventListener("input", drawMeme);
+textSize.addEventListener("input", drawMeme);
+
+
+// Draw meme
+function drawMeme(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.drawImage(image,0,0);
 
-    ctx.font = "40px Impact";
+
+    if(img.src){
+
+        let ratio = Math.min(
+            canvas.width / img.width,
+            canvas.height / img.height
+        );
+
+
+        let width = img.width * ratio;
+        let height = img.height * ratio;
+
+
+        let x = (canvas.width - width) / 2;
+        let y = (canvas.height - height) / 2;
+
+
+        ctx.drawImage(
+            img,
+            x,
+            y,
+            width,
+            height
+        );
+
+    } else {
+
+        ctx.fillStyle = "white";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    }
+
+
+    let size = textSize.value;
+
+    ctx.font = `bold ${size}px Arial`;
     ctx.textAlign = "center";
-    ctx.fillStyle = "white";
     ctx.strokeStyle = "black";
+    ctx.fillStyle = "white";
     ctx.lineWidth = 5;
 
-    const top = document.getElementById("topText").value;
-    const bottom = document.getElementById("bottomText").value;
 
-    const topY = document.getElementById("topY").value;
-    const bottomY = document.getElementById("bottomY").value;
+    // Top text
+    ctx.strokeText(
+        topText.value.toUpperCase(),
+        canvas.width/2,
+        60
+    );
 
-    ctx.strokeText(top, canvas.width/2, topY);
-    ctx.fillText(top, canvas.width/2, topY);
+    ctx.fillText(
+        topText.value.toUpperCase(),
+        canvas.width/2,
+        60
+    );
 
-    ctx.strokeText(bottom, canvas.width/2, bottomY);
-    ctx.fillText(bottom, canvas.width/2, bottomY);
+
+    // Bottom text
+    ctx.strokeText(
+        bottomText.value.toUpperCase(),
+        canvas.width/2,
+        canvas.height - 40
+    );
+
+    ctx.fillText(
+        bottomText.value.toUpperCase(),
+        canvas.width/2,
+        canvas.height - 40
+    );
+
 }
 
-function downloadMeme(){
-    const link = document.createElement("a");
-    link.download = "meme.png";
-    link.href = canvas.toDataURL();
-    link.click();
-}
 
-const memes = [
-    {
-        image:"sddefault.jpg",
-        top:"When the teacher says the homework is easy",
-        bottom:"The homework:"
-    },
-    {
-        image:"https://i.imgflip.com/1bij.jpg",
-        top:"Me trying to fix something",
-        bottom:"Making it worse"
-    },
-    {
-        image:"https://i.imgflip.com/1g8my4.jpg",
-        top:"When someone says one more game",
-        bottom:"3 hours later..."
-    }
-];
 
+// Random meme text
 function randomMeme(){
-    const meme = memes[Math.floor(Math.random()*memes.length)];
 
-    image.onload = function(){
-        resizeCanvas();
+    const tops = [
+        "WHEN YOU",
+        "ME TRYING TO",
+        "NOBODY:",
+        "POV:",
+        "THAT MOMENT WHEN"
+    ];
 
-        document.getElementById("topText").value = meme.top;
-        document.getElementById("bottomText").value = meme.bottom;
 
-        makeMeme();
-    };
+    const bottoms = [
+        "IT ACTUALLY WORKS",
+        "EVERYTHING BREAKS",
+        "THIS HAPPENS",
+        "I REGRET EVERYTHING",
+        "ABSOLUTE CHAOS"
+    ];
 
-    image.src = meme.image;
+
+    topText.value =
+        tops[Math.floor(Math.random()*tops.length)];
+
+
+    bottomText.value =
+        bottoms[Math.floor(Math.random()*bottoms.length)];
+
+
+    drawMeme();
+
 }
 
-document.getElementById("topText").addEventListener("input", makeMeme);
-document.getElementById("bottomText").addEventListener("input", makeMeme);
-document.getElementById("topY").addEventListener("input", makeMeme);
-document.getElementById("bottomY").addEventListener("input", makeMeme);
+
+
+// Download meme
+function downloadMeme(){
+
+    const link = document.createElement("a");
+
+    link.download = "meme.png";
+
+    link.href = canvas.toDataURL();
+
+    link.click();
+
+}
+
+
+
+// 🚨 MAX EASTER EGG 🚨
+function deleteEverything(){
+
+    const alertBox = document.getElementById("alertBox");
+
+    alertBox.style.display = "block";
+
+
+    alertBox.innerHTML = `
+    🚨 EMERGENCY ALERT 🚨
+    <br><br>
+    Max has pressed the delete button.
+    <br><br>
+    Initiating anti-chaos protocols...
+    <br><br>
+    🛡️ Backup created successfully.
+    `;
+
+
+    // Fake backup message
+    console.log(
+    "Backup created successfully. Max has been warned 😎"
+    );
+
+
+}
+
 </script>
 
 </body>
-</html>
+</html>    
