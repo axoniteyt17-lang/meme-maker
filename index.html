@@ -138,6 +138,10 @@ canvas{
 }
 </style>
 </head>
+<style>
+
+
+
 #popup {
     position: fixed;
     top: 50%;
@@ -153,6 +157,14 @@ canvas{
     transition:.3s;
     z-index:9999;
 }
+
+#popup.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+</style>
+
+<body>
 
 #popup.show {
     transform: translate(-50%, -50%) scale(1);
