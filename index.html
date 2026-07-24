@@ -296,18 +296,12 @@ function randomMeme(){
     };
 
     image.src = meme.image;
-}
-function deleteEverything(){
+}function deleteEverything(){
 
-    const popup = document.getElementById("popup");
-
-    popup.classList.add("show");
-
-    setTimeout(() => {
-        popup.classList.remove("show");
-    }, 5000);
+    alert("🚨 EMERGENCY ALERT 🚨\n\nMax has pressed the delete button.\n\nInitiating anti-chaos protocols...\n\n🛡️ Backup created successfully.");
 
 }
+
 document.getElementById("topText").addEventListener("input", makeMeme);
 document.getElementById("bottomText").addEventListener("input", makeMeme);
 document.getElementById("topY").addEventListener("input", makeMeme);
