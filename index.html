@@ -138,7 +138,25 @@ canvas{
 }
 </style>
 </head>
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg,#ec4899,#8b5cf6);
+    color:white;
+    padding:30px;
+    border-radius:25px;
+    font-size:22px;
+    font-weight:600;
+    box-shadow:0 20px 50px rgba(0,0,0,.5);
+    transition:.3s;
+    z-index:9999;
+}
 
+#popup.show {
+    transform: translate(-50%, -50%) scale(1);
+}
 <body>
 
 <div class="container">
@@ -179,7 +197,7 @@ canvas{
 <button onclick="makeMeme()">✨ Create Meme</button>
 <button onclick="downloadMeme()">⬇ Download</button>
 <button onclick="randomMeme()">⭐ Random Meme</button>
-
+<button onclick="deleteEverything()">🗑️ Delete Everything</button>
 <canvas id="canvas"></canvas>
 
 </div>
@@ -230,7 +248,6 @@ function makeMeme(){
 
     const top = document.getElementById("topText").value;
     const bottom = document.getElementById("bottomText").value;
-
     const topY = document.getElementById("topY").value;
     const bottomY = document.getElementById("bottomY").value;
 
@@ -280,12 +297,31 @@ function randomMeme(){
 
     image.src = meme.image;
 }
+function deleteEverything(){
 
+    const popup = document.getElementById("popup");
+
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 5000);
+
+}
 document.getElementById("topText").addEventListener("input", makeMeme);
 document.getElementById("bottomText").addEventListener("input", makeMeme);
 document.getElementById("topY").addEventListener("input", makeMeme);
 document.getElementById("bottomY").addEventListener("input", makeMeme);
 </script>
 
+<div id="popup">
+🚨 EMERGENCY ALERT 🚨
+<br><br>
+Max has pressed the delete button.
+<br><br>
+Initiating anti-chaos protocols...
+<br><br>
+🛡️ Backup created successfully.
+</div>
 </body>
 </html>
